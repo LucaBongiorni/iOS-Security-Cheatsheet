@@ -153,4 +153,117 @@ Now this representation is something we can wrap our brain around.  If you want 
 
 This roughly translates into ``` objc_msgSend(SetUserPrefs, setPrefs); ```
 
-Now we have something we can really focus on -> ```[SetUserPrefs setPrefs]``` - let's use **Hopper** and navigate to that specific subroutine.
+Now we have something we can really focus on -> ```[SetUserPrefs setPrefs]``` - let's use **Hopper** and navigate to that specific subroutine:
+
+```
+             -[SetUserPrefs setPrefs]:
+00009d98         push       {r7, lr}                                            ; Objective C Implementation defined at 0xc150 (instance), XREF=0x40ac
+00009d9a         mov        r7, sp
+00009d9c         sub        sp, #0x24
+00009d9e         movw       r2, #0x22a6
+00009da2         movt       r2, #0x0
+00009da6         add        r2, pc                                              ; @"rotlogix"
+00009da8         movw       r3, #0x2b0c
+00009dac         movt       r3, #0x0
+00009db0         add        r3, pc                                              ; objc_ivar_offset_SetUserPrefs_username
+00009db2         str        r0, [sp, #0x24 + var_20]
+00009db4         str        r1, [sp, #0x24 + var_1C]
+00009db6         ldr        r0, [sp, #0x24 + var_20]
+00009db8         ldr        r1, [r3]                                            ; objc_ivar_offset_SetUserPrefs_username
+00009dba         add        r0, r1                                              ; argument #1 for method imp___symbolstub1__objc_storeStrong
+00009dbc         mov        r1, r2                                              ; argument #2 for method imp___symbolstub1__objc_storeStrong
+00009dbe         blx        imp___symbolstub1__objc_storeStrong
+00009dc2         movw       r0, #0x2292
+00009dc6         movt       r0, #0x0
+00009dca         add        r0, pc                                              ; @"rotlogix@gmail.com"
+00009dcc         movw       r1, #0x2aec
+00009dd0         movt       r1, #0x0
+00009dd4         add        r1, pc                                              ; objc_ivar_offset_SetUserPrefs_email
+00009dd6         ldr        r2, [sp, #0x24 + var_20]
+00009dd8         ldr        r1, [r1]                                            ; objc_ivar_offset_SetUserPrefs_email
+00009dda         add        r1, r2
+00009ddc         str        r0, [sp, #0x24 + var_14]
+00009dde         mov        r0, r1                                              ; argument #1 for method imp___symbolstub1__objc_storeStrong
+00009de0         ldr        r1, [sp, #0x24 + var_14]                            ; argument #2 for method imp___symbolstub1__objc_storeStrong
+00009de2         blx        imp___symbolstub1__objc_storeStrong
+00009de6         movw       r0, #0x2256
+00009dea         movt       r0, #0x0
+00009dee         add        r0, pc                                              ; imp___nl_symbol_ptr__objc_msgSend
+00009df0         ldr        r0, [r0]                                            ; imp___nl_symbol_ptr__objc_msgSend
+00009df2         movw       r1, #0x2a22
+00009df6         movt       r1, #0x0
+00009dfa         add        r1, pc                                              ; @selector(standardUserDefaults)
+00009dfc         movw       r2, #0x2a8c
+00009e00         movt       r2, #0x0
+00009e04         add        r2, pc                                              ; objc_cls_ref_NSUserDefaults
+00009e06         ldr        r2, [r2]                                            ; objc_cls_ref_NSUserDefaults
+00009e08         ldr        r1, [r1]                                            ; @selector(standardUserDefaults)
+00009e0a         str        r0, [sp, #0x24 + var_10]
+00009e0c         mov        r0, r2
+00009e0e         ldr        r2, [sp, #0x24 + var_10]
+00009e10         blx        r2                                                  ; _OBJC_CLASS_$_NSUserDefaults
+00009e12         mov        r7, r7
+00009e14         blx        imp___symbolstub1__objc_retainAutoreleasedReturnValue
+00009e18         movw       r1, #0x224c
+00009e1c         movt       r1, #0x0
+00009e20         add        r1, pc                                              ; @"username"
+00009e22         movw       r2, #0x221a
+00009e26         movt       r2, #0x0
+00009e2a         add        r2, pc                                              ; imp___nl_symbol_ptr__objc_msgSend
+00009e2c         ldr        r2, [r2]                                            ; imp___nl_symbol_ptr__objc_msgSend
+00009e2e         movw       r3, #0x29ea
+00009e32         movt       r3, #0x0
+00009e36         add        r3, pc                                              ; @selector(setValue:forKey:)
+00009e38         movw       sb, #0x2a7c
+00009e3c         movt       sb, #0x0
+00009e40         add        sb, pc                                              ; objc_ivar_offset_SetUserPrefs_username
+00009e42         str        r0, [sp, #0x24 + var_18]
+00009e44         ldr        r0, [sp, #0x24 + var_18]
+00009e46         ldr.w      ip, [sp, #0x24 + var_20]
+00009e4a         ldr.w      sb, [sb]                                            ; objc_ivar_offset_SetUserPrefs_username
+00009e4e         add        sb, ip
+00009e50         ldr.w      sb, [sb]
+00009e54         ldr        r3, [r3]                                            ; @selector(setValue:forKey:)
+00009e56         str        r1, [sp, #0x24 + var_C]
+00009e58         mov        r1, r3
+00009e5a         str        r2, [sp, #0x24 + var_8]
+00009e5c         mov        r2, sb
+00009e5e         ldr        r3, [sp, #0x24 + var_C]
+00009e60         ldr.w      sb, [sp, #0x24 + var_8]
+00009e64         blx        sb
+00009e66         movw       r0, #0x220e
+00009e6a         movt       r0, #0x0
+00009e6e         add        r0, pc                                              ; @"email"
+00009e70         movw       r1, #0x21cc
+00009e74         movt       r1, #0x0
+00009e78         add        r1, pc                                              ; imp___nl_symbol_ptr__objc_msgSend
+00009e7a         ldr        r1, [r1]                                            ; imp___nl_symbol_ptr__objc_msgSend
+00009e7c         movw       r2, #0x299c
+00009e80         movt       r2, #0x0
+00009e84         add        r2, pc                                              ; @selector(setValue:forKey:)
+00009e86         movw       r3, #0x2a32
+00009e8a         movt       r3, #0x0
+00009e8e         add        r3, pc                                              ; objc_ivar_offset_SetUserPrefs_email
+00009e90         ldr.w      sb, [sp, #0x24 + var_18]
+00009e94         ldr.w      ip, [sp, #0x24 + var_20]
+00009e98         ldr        r3, [r3]                                            ; objc_ivar_offset_SetUserPrefs_email
+00009e9a         add        r3, ip
+00009e9c         ldr        r3, [r3]
+00009e9e         ldr        r2, [r2]                                            ; @selector(setValue:forKey:)
+00009ea0         str        r0, [sp, #0x24 + var_4]
+00009ea2         mov        r0, sb
+00009ea4         str        r1, [sp, #0x24 + var_0]
+00009ea6         mov        r1, r2
+00009ea8         mov        r2, r3
+00009eaa         ldr        r3, [sp, #0x24 + var_4]
+00009eac         ldr.w      sb, [sp, #0x24 + var_0]
+00009eb0         blx        sb                                                  ; @"email"
+00009eb2         movs       r1, #0x0                                            ; argument #2 for method imp___symbolstub1__objc_storeStrong
+00009eb4         add        r0, sp, #0x18                                       ; argument #1 for method imp___symbolstub1__objc_storeStrong
+00009eb6         blx        imp___symbolstub1__objc_storeStrong
+00009eba         add        sp, #0x24
+00009ebc         pop        {r7, pc}
+                        ; endp
+```
+
+Because of the message passing conversion process -> this generate quite a few instructions.
