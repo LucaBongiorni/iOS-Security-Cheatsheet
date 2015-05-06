@@ -135,5 +135,22 @@ char -[AppDelegate application:didFinishLaunchingWithOptions:](void * self, void
 }
 ```
 
-Now this representation is something we can wrap our brain around.
+Now this representation is something we can wrap our brain around.  If you want to just stare at assembly: 
 
+```
+00009f86         ldr        r1, [r1]                                            ; imp___nl_symbol_ptr__objc_msgSend
+00009f88         movw       r2, #0x289c
+00009f8c         movt       r2, #0x0
+00009f90         add        r2, pc                                              ; @selector(setPrefs)
+00009f92         str        r0, [sp, #0x28 + var_14]
+00009f94         ldr        r0, [sp, #0x28 + var_14]
+00009f96         ldr        r2, [r2]                                            ; @selector(setPrefs)
+00009f98         str        r1, [sp, #0x28 + var_0]
+00009f9a         mov        r1, r2
+00009f9c         ldr        r2, [sp, #0x28 + var_0]
+00009f9e         blx        r2                                                  ; 0xadd4
+```
+
+This roughly translates into ``` objc_msgSend(SetUserPrefs, setPrefs); ```
+
+Now we have something we can really focus on -> ```[SetUserPrefs setPrefs]``` - let's use **Hopper** and navigate to that specific subroutine.
