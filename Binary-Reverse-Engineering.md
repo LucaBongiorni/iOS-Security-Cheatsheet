@@ -106,7 +106,7 @@ Flow:
 
 The compiler will convert all of these into ```objc(ID ReceiverObject, SEL method, args .. );``` respectively.  We also have to remember that when looking at this assembly, the runtime is will check the ```isa``` pointer of the instance object itself.  This points directly at the class structure, and is also used to look up the corresponding ```SEL``` method in a dispatch table.
 
-Hopper offers pretty solid functionality that will attempt to convert this into sudo code: 
+**Hopper** offers pretty solid functionality that will attempt to convert this into sudo code: 
 
 ```
 char -[AppDelegate application:didFinishLaunchingWithOptions:](void * self, void * _cmd, void * arg2, void * arg3) {
