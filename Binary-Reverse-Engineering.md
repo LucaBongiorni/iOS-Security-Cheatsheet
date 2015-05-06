@@ -1,7 +1,9 @@
 Binary Reverse Engineering
 --------------------------
 
-**Hopper**
+Hopper
+------
+------
 
 1.) Loading the Binary
 
