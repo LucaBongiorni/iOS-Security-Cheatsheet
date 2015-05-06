@@ -104,4 +104,4 @@ Flow:
   - methodToCall
   - release
 
-The compiler will convert all of these into ```objc(ID ReceiverObject, SEL method, args .. );``` respectively.  We also have to remember that when looking at this assembly, the runtime is looking at the 'isa' pointer when the instance object itself.  This points directly at the class structure, and is also used to look up the corresponding method in a dispatch table.
+The compiler will convert all of these into ```objc(ID ReceiverObject, SEL method, args .. );``` respectively.  We also have to remember that when looking at this assembly, the runtime is will check the ```isa``` pointer of the instance object itself.  This points directly at the class structure, and is also used to look up the corresponding ```SEL``` method in a dispatch table.
