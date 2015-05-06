@@ -92,3 +92,16 @@ I like to start reversing at ``` -[AppDelegate applicationdidFinishLaunchingWith
 00009fc2         pop        {r7, pc}
                         ; endp
 ```
+
+Breaking down the ARM assembly can be a bit daunting, especially since static diassembler have a hard time representing the dynamic dispatching nature of Objective-C.  So how do we simplify this for ourselves?
+
+First we should already understand the messaging mechanics of objc_msgSend() and what the syntax will be if you were to create a new instance object in Objective-C. 
+
+Flow:
+
+  - alloc
+  - init
+  - methodToCall
+  - release
+
+The compiler will convert all of these into ```objc(ID ReceiverObject, SEL method, args .. );``` respectively
