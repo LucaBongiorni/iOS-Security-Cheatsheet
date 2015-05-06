@@ -1,7 +1,7 @@
 Binary Enumeration
 ------------------
 
-First we need to figure out if we are dealing with a Universal 'FAT' binary, or Macho-0: 
+First we need to figure out if we are dealing with a Universal 'FAT' binary, or Macho-O: 
 
 ```
 [~/Development/python/mach-O-parser]> file NSUserDefaultsExample
@@ -55,7 +55,7 @@ MH_MAGIC_64   ARM64        ALL  0x00     EXECUTE    24       2816   NOUNDEFS DYL
 
 PIE is included within the flags for each binary, so now we know we are dealing with binaries compiled with ASLR.  
 
-If the application came from the Apple Store, then we know it is probably encrypted.  We can use otool to read the cryptid field within the LC_SEGMENT:
+If the application came from the Apple Store, then we know it is probably encrypted.  We can use otool to read the ```cryptid``` field within the ```LC_SEGMENT```:
 
 ```
 [~/Development/python/mach-O-parser]> otool -lV NSUserDefaultsExample | grep 'cryptid'
