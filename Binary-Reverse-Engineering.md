@@ -135,4 +135,5 @@ char -[AppDelegate application:didFinishLaunchingWithOptions:](void * self, void
 }
 ```
 
+Now this representation is something we can wrap our brain around.
 
