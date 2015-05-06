@@ -2,8 +2,7 @@ Binary Reverse Engineering
 --------------------------
 
 Hopper
-------
-------
+======
 
 1.) Loading the Binary
 
