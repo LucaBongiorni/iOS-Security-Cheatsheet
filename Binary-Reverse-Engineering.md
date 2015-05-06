@@ -105,3 +105,34 @@ Flow:
   - release
 
 The compiler will convert all of these into ```objc(ID ReceiverObject, SEL method, args .. );``` respectively.  We also have to remember that when looking at this assembly, the runtime is will check the ```isa``` pointer of the instance object itself.  This points directly at the class structure, and is also used to look up the corresponding ```SEL``` method in a dispatch table.
+
+Hopper offers pretty solid functionality that will attempt to convert this into sudo code: 
+
+```
+char -[AppDelegate application:didFinishLaunchingWithOptions:](void * self, void * _cmd, void * arg2, void * arg3) {
+    var_24 = self;
+    var_20 = _cmd;
+    var_1C = 0x0;
+    var_C = arg3;
+    objc_storeStrong((sp - 0x28) + 0x1c, arg2);
+    var_18 = 0x0;
+    objc_storeStrong((sp - 0x28) + 0x18, var_C);
+    r0 = *objc_msgSend;
+    var_8 = r0;
+    objc_class_SetUserPrefs(SetUserPrefs, @selector(alloc), var_8);
+    r1 = *objc_msgSend;
+    var_4 = r1;
+    r0 = loc_ae00();
+    r1 = *objc_msgSend;
+    var_14 = r0;
+    var_0 = r1;
+    loc_add4(var_14, @selector(setPrefs), var_0);
+    var_10 = 0x1;
+    objc_storeStrong((sp - 0x28) + 0x14, 0x0);
+    objc_storeStrong((sp - 0x28) + 0x18, 0x0);
+    objc_storeStrong((sp - 0x28) + 0x1c, 0x0);
+    return r0;
+}
+```
+
+
