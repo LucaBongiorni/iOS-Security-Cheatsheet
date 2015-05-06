@@ -1,3 +1,4 @@
+
 Binary Reverse Engineering
 ==========================
 
@@ -266,4 +267,63 @@ Now we have something we can really focus on -> ```[SetUserPrefs setPrefs]``` - 
                         ; endp
 ```
 
-Because of the message passing conversion process -> this generate quite a few instructions.
+Because of the message passing conversion process -> this generate quite a few instructions.  Generating sudo code gives us something more manageable: 
+
+```
+void -[SetUserPrefs setPrefs](void * self, void * _cmd) {
+    var_20 = self;
+    var_1C = _cmd;
+    objc_storeStrong(var_20 + *objc_ivar_offset_SetUserPrefs_username, @"rotlogix");
+    r1 = *objc_ivar_offset_SetUserPrefs_email;
+    var_14 = @"rotlogix@gmail.com";
+    objc_storeStrong(r1 + var_20, var_14);
+    r0 = *objc_msgSend;
+    var_10 = r0;
+    r0 = _OBJC_CLASS_$_NSUserDefaults(NSUserDefaults, @selector(standardUserDefaults), var_10);
+    r0 = [r0 retain];
+    r2 = *objc_msgSend;
+    var_18 = r0;
+    s0 = *objc_ivar_offset_SetUserPrefs_username;
+    s0 = *0x4;
+    var_C = @"username";
+    var_8 = r2;
+    [var_18 setValue:s0 forKey:var_C];
+    r1 = *objc_msgSend;
+    r3 = *objc_ivar_offset_SetUserPrefs_email;
+    r3 = *0x8;
+    var_4 = @"email";
+    var_0 = r1;
+    (@"email")(var_18, @selector(setValue:forKey:), r3, var_4);
+    objc_storeStrong((sp - 0x24) + 0x18, 0x0);
+    return;
+}
+
+```
+
+There area few things of importance: 
+
+```
+r1 = *objc_ivar_offset_SetUserPrefs_email;
+s0 = *objc_ivar_offset_SetUserPrefs_username;
+```
+There appears to be instance variables named email and username.
+
+```
+r0 = _OBJC_CLASS_$_NSUserDefaults(NSUserDefaults, @selector(standardUserDefaults), var_10);
+```
+And a instance ($) of **NSUserDefaults**. The **NSUserDefaults** class provides a programmatic interface for interacting with the default system.  Applications can record preferences by assigning values to a set of parameters in a user’s defaults database. Using this class would go something like this:
+
+```
+NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+[defaults setInteger:9001 for key:@“HighScore”];
+[defaults synchronize];
+```
+Sure enough it looks like the same type of functionality: 
+
+```
+var_C = @"username";
+var_8 = r2;
+[var_18 setValue:s0 forKey:var_C];
+```
+
+From this we can deduce that the applicaton is writing the values from username and email address using NSUserDefaults.
